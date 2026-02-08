@@ -41,9 +41,9 @@ T2 ──┘
 - **location**: /home/willr/Applications/swarms/test-output/index.html
 - **description**: Create an index.html page that includes the greeting card component and demonstrates the utility functions. The page should have a clean layout with the greeting card displayed prominently at the top, and below it a section showing the output of each utility function with example inputs. Style the page with a light gray background, centered content (max-width 800px), and clean typography.
 - **validation**: File exists, references both the component and utilities, has proper styling
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Created index.html that embeds the greeting card component inline (matching styles from GreetingCard.html) and imports all three utility functions from helpers.js via ES module. Page has light gray (#f5f5f5) background, centered container (max-width 800px), clean typography. Greeting card is displayed prominently at top. Below it, a white card section demonstrates formatDate, capitalize, and slugify with example inputs and live output.
+- **files edited/created**: /home/willr/Applications/swarms/test-output/index.html (created)
 
 ## Parallel Execution Groups
 
