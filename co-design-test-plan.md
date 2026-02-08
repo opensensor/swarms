@@ -32,9 +32,9 @@ T2 ──┘
 - **location**: /home/willr/Applications/swarms/test-output/utils/helpers.js
 - **description**: Create a JavaScript utility module that exports three functions: (1) `formatDate(date)` - takes a Date object and returns a string in "YYYY-MM-DD" format, (2) `capitalize(str)` - capitalizes the first letter of a string, (3) `slugify(str)` - converts a string to a URL-friendly slug (lowercase, spaces to hyphens, remove special chars). Use ES module syntax (export).
 - **validation**: File exists and contains three exported functions with correct logic
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Created helpers.js module with all three utility functions using ES module syntax. formatDate formats Date objects to YYYY-MM-DD format using padStart for zero-padding. capitalize handles edge cases for empty strings. slugify removes special characters, converts spaces to hyphens, and normalizes multiple hyphens.
+- **files edited/created**: /home/willr/Applications/swarms/test-output/utils/helpers.js (created)
 
 ### T3: Create an index page that imports both
 - **depends_on**: [T1, T2]
