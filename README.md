@@ -90,7 +90,7 @@ Swarms uses subagents to execute tasks in parallel. Codex CLI users must enable 
 
 ```toml
 [features]
-collab = true
+multi_agents = true
 ```
 
 Without this setting, the parallel-task skill will not be able to spawn subagents.
