@@ -100,24 +100,37 @@ Validation:
 
 ## Instructions
 - Use the `sparky` agent role for this task; do not use any other role.
-1. Examine the plan and all listed canonical paths before editing
-2. Implement changes for all acceptance criteria
-3. Keep work atomic and committable
-4. For each file: read first, edit carefully, preserve formatting
-5. Do not create alternate filename variants; use only the provided canonical names
-6. If you need to touch/create a path not listed, stop and report it first
-7. Run validation if feasible
-8. ALWAYS mark completed tasks IN THE *-plan.md file AS SOON AS YOU COMPLETE IT! and update with:
+1. Read the working plan and fully understand this task before coding.
+2. Examine the plan and all listed canonical paths before editing.
+3. Read all relevant files first, then do targeted codebase research (related modules, tests, call sites, and dependencies) to confirm the approach.
+4. Default to TDD RED phase first using a `tdd_test_writer` subagent:
+   - Pass task context, canonical paths, and acceptance criteria.
+   - Require tests-only edits.
+   - Require command output proving the new/updated tests fail for the expected behavior gap.
+   - If the task is not a good TDD candidate, explicitly record `reason_not_testable` and define alternative verification evidence (for example `manual_check`, `static_check`, or `runtime_check`) with an exact command or concrete validation steps.
+5. Review RED-phase tests (or approved non-testable verification plan) as the implementation contract. Do not weaken or remove tests unless requirements changed.
+6. Implement production changes for all acceptance criteria.
+7. Keep work atomic and committable.
+8. For each file: read first, edit carefully, preserve formatting.
+9. Do not create alternate filename variants; use only the provided canonical names.
+10. If you need to touch/create a path not listed, stop and report it first.
+11. Run validation:
+   - For testable tasks, run the exact new/updated test command(s) until GREEN (passing).
+   - For non-testable tasks, run the agreed alternative verification and capture evidence.
+   - Run any additional validation steps from the plan if feasible.
+12. Commit your work.
+   - Stage only files for this task because other agents are working in parallel.
+   - NEVER PUSH. ONLY COMMIT.
+13. After the commit, update the `*-plan.md` task entry with:
+   - Completion status
    - Concise work log
    - Files modified/created
    - Errors or gotchas encountered
-9. Commit your work
-   - Note: There are other agents working in parallel to you, so only stage and commit the files you worked on. NEVER PUSH. ONLY COMMIT.
-10. Double check that you updated the *-plan.md file and committed your work before yielding
-11. Return summary of:
+14. Return summary of:
    - Files modified/created (exact paths)
    - Changes made
    - How criteria are satisfied
+   - Verification evidence: RED -> GREEN or documented non-testable alternative
    - Validation performed or deferred
 
 ## Important
@@ -132,9 +145,10 @@ Validation:
 As each subagent finishes:
 1. Inspect output for correctness and completeness.
 2. Validate against expected outcomes for that task.
-3. Ensure plan file completion state + logs were updated correctly.
-4. Retry/escalate on failure.
-5. Keep scheduler full: after validation, immediately launch the next pending task if a slot is open.
+3. Ensure RED -> GREEN test evidence or explicit non-testable verification evidence is present.
+4. Ensure the task commit exists and the plan file completion state + logs were updated correctly.
+5. Retry/escalate on failure.
+6. Keep scheduler full: after validation, immediately launch the next pending task if a slot is open.
 
 ### Step 6: Final Orchestrator Integration Pass
 
@@ -142,13 +156,14 @@ After all subagents are done:
 1. Reconcile parallel-work conflicts and cross-task breakage.
 2. Resolve duplicate/variant filenames and converge to canonical paths.
 3. Ensure the plan is fully and accurately updated.
-4. Add or adjust tests to cover integration/regression gaps.
+4. Add or adjust tests to cover integration/regression gaps where task-level RED coverage missed cross-task behavior.
 5. Run required tests.
 6. Fix failures.
-7. Re-run tests until green (or report explicit blockers with evidence).
+7. Re-run tests until GREEN (or report explicit blockers with evidence).
 
 Completion bar:
 - All plan tasks marked complete with logs
+- Every task has RED -> GREEN evidence or documented non-testable verification with concrete commands/steps
 - Integrated codebase builds/tests per plan expectations
 - No unresolved path/name divergence introduced by parallel execution
 
